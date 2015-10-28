@@ -31,8 +31,7 @@ struct parallel_mc_task {
 	output_container out;
 	output_container history;//added
 	rng generator;
-	visited* tried;
-	parallel_mc_task(const model& m_, int seed, /*output_container& history_,*/ visited* visited_) : m(m_), generator(static_cast<rng::result_type>(seed)), /*history(history_),*/ tried(visited_) {}
+	parallel_mc_task(const model& m_, int seed /*output_container& history_,*/ ) : m(m_), generator(static_cast<rng::result_type>(seed)) /*history(history_),*/ {}
 };
 typedef boost::ptr_vector<parallel_mc_task> parallel_mc_task_container;
 
