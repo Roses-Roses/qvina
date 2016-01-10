@@ -91,8 +91,9 @@ linearvisited* linearvisited::getInstance(){
 }
 
 /**
- * returns -1 if interesting (found at least one point with accepted condition),
- * or a number >=0 indicating number of done checks otherwise (if nothing is found).
+ * returns minus number of checks dne if interesting (found at least one point with accepted condition),
+ * or number of done checks otherwise (if nothing is found).
+ * success is always a negative number, while failure can be >= 0.
  */
 int linearvisited::interesting(conf x, double f, change g, int excluded) {
 	//n.b. excluded is not used. it is here only for homology with the other function
@@ -140,7 +141,7 @@ int linearvisited::interesting(conf x, double f, change g, int excluded) {
 		}
 		maybeChecked[p]=false;
 		if (this->list[p].check(conf_v, f, change_v))
-			return -1; //i.e. return success
+			return -i; //i.e. return success
 	}
 	r_lock.unlock();
 	return i;
@@ -152,13 +153,13 @@ int circularvisited::interesting(conf x, double f, change g, int excluded){
 
 	int len=size();
 	if (len==0){
-		return -1; //i.e. interesting
+		return -1000000; //i.e. interesting
 	}
 	else{
 //		if (len<2*n_variable)
 		if (!full){
 //			printf("len==%d<%d\n",len,10*n_variable);
-			return -1; //i.e. interesting
+			return -1000000; //i.e. interesting
 		}
 
 		std::vector<double> conf_v;
@@ -189,7 +190,7 @@ int circularvisited::interesting(conf x, double f, change g, int excluded){
 			}
 			notPicked[p]=false;
 			if (this->get(p).check(conf_v, f, change_v))
-				return -1; //i.e. interesting
+				return -i; //i.e. interesting
 		}
 		return i;//i.e. not interesting after checking i points
 	}
