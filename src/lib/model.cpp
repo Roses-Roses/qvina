@@ -568,7 +568,7 @@ void model::write_context(const context& c, ofile& out) const {
 		if(c[i].second) {
 			std::string StringWithPdbqtCoords = coords_to_pdbqt_string(coords[c[i].second.get()], str);
 			//lable using the Chain ID
-			StringWithPdbqtCoords[22-1] = 'A'+global;
+			StringWithPdbqtCoords[22-1] = global;
 
 //			label using B-Factor
 //			if(global){

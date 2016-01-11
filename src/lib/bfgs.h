@@ -126,7 +126,7 @@ fl bfgs(F& f, Conf& x, Change& g, const unsigned max_steps, const fl average_req
 
 #if WRITE_HISTORY
 	if(history)
-		history->push_back(new output_type(x, f0, global ? 10 : 7));//Global or local only
+		history->push_back(new output_type(x, f0, global ? 'C' : 'A'));//Global or local only
 #endif
 	if(tried){
 //		if (!(/*f.p->*/buffer_allthreads->interesting(x, f0, g, 0)||tried->interesting(x, f0, g, ret))) {
@@ -138,7 +138,7 @@ fl bfgs(F& f, Conf& x, Change& g, const unsigned max_steps, const fl average_req
 			/*f.m->*/tried->add(x, f0, g);
 #if WRITE_HISTORY
 			if(history && global)
-				history->push_back(new output_type(x, f0, 2));//QVina accepted
+				history->push_back(new output_type(x, f0, 'C'));//QVina accepted
 #endif
 		}
 	}
@@ -176,7 +176,7 @@ fl bfgs(F& f, Conf& x, Change& g, const unsigned max_steps, const fl average_req
 			tried->add(x, f0, g);
 #if WRITE_HISTORY
 		if(history && !global)
-			history->push_back(new output_type(x, f0, 7));//local search only
+			history->push_back(new output_type(x, f0, 'L'));//local search only
 #endif
 		}
  	}
